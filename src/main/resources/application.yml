@@ -1,2 +1,6 @@
 spring.profiles.active: local
+spring.profiles.include: mail
 spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+spring:
+  mail:
+    host: smtp.gmail.com
