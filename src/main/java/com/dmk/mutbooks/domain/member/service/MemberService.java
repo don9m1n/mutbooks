@@ -1,5 +1,6 @@
 package com.dmk.mutbooks.domain.member.service;
 
+import com.dmk.mutbooks.domain.email.service.EmailService;
 import com.dmk.mutbooks.domain.member.dto.request.JoinRequest;
 import com.dmk.mutbooks.domain.member.model.Member;
 import com.dmk.mutbooks.domain.member.repository.MemberRepository;
@@ -15,6 +16,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     public void join(JoinRequest joinRequest) {
 
@@ -26,6 +28,7 @@ public class MemberService {
         Member member = Member.of(joinRequest, passwordEncoder.encode(joinRequest.getPassword()));
         memberRepository.save(member);
 
-        // TODO: 이메일 발송
+        emailService.sendMail(member.getEmail());
+
     }
 }
