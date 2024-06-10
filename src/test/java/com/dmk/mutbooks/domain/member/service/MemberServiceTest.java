@@ -1,5 +1,6 @@
 package com.dmk.mutbooks.domain.member.service;
 
+import com.dmk.mutbooks.domain.email.service.EmailService;
 import com.dmk.mutbooks.domain.member.dto.request.JoinRequest;
 import com.dmk.mutbooks.domain.member.model.Member;
 import com.dmk.mutbooks.domain.member.repository.MemberRepository;
@@ -17,8 +18,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
+import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.mock;
 
 @DisplayName("비즈니스 로직 테스트 - 회원")
@@ -27,6 +27,9 @@ class MemberServiceTest {
 
     @InjectMocks
     private MemberService sut;
+
+    @Mock
+    private EmailService emailService;
 
     @Mock
     private MemberRepository memberRepository;
@@ -42,6 +45,7 @@ class MemberServiceTest {
         given(memberRepository.findByUsername(joinRequest.getUsername())).willReturn(Optional.empty());
         given(passwordEncoder.encode(anyString())).willReturn("encrypt_password");
         given(memberRepository.save(any(Member.class))).willReturn(mock(Member.class));
+        willDoNothing().given(emailService).sendMail(joinRequest.getEmail());
 
         // when
         sut.join(joinRequest);
@@ -50,6 +54,7 @@ class MemberServiceTest {
         then(memberRepository).should().findByUsername(joinRequest.getUsername());
         then(passwordEncoder).should().encode(anyString());
         then(memberRepository).should().save(any(Member.class));
+        then(emailService).should().sendMail(joinRequest.getEmail());
     }
 
     private JoinRequest createJoinRequest() {
