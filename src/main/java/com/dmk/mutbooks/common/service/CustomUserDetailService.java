@@ -1,5 +1,6 @@
 package com.dmk.mutbooks.common.service;
 
+import com.dmk.mutbooks.common.model.CustomUserDetails;
 import com.dmk.mutbooks.domain.member.model.AuthLevel;
 import com.dmk.mutbooks.domain.member.model.Member;
 import com.dmk.mutbooks.domain.member.repository.MemberRepository;
@@ -37,6 +38,6 @@ public class CustomUserDetailService implements UserDetailsService {
             case ADMIN -> authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
 
-        return new User(member.getUsername(), member.getPassword(), authorities);
+        return new CustomUserDetails(member, authorities);
     }
 }
