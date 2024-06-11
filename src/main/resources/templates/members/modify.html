@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:action="@{/members/modify}" method="post">
+        <div>
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" th:value="${#authentication.principal.email}"  placeholder="이메일을 입력해주세요." />
+        </div>
+        <div>
+            <label for="nickname">작가명</label>
+            <input type="text" id="nickname" name="nickname" th:value="${#authentication.principal.nickname}"  placeholder="작가명을 입력해주세요."/>
+        </div>
+
+        <button type="submit">회원정보 수정</button>
+    </form>
+</body>
+</html>

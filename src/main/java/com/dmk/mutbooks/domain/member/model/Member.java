@@ -51,4 +51,15 @@ public class Member extends AuditingFields {
                 .build();
     }
 
+    public void modify(String email, String nickname) {
+        this.email = email;
+
+        if (!nickname.isEmpty()) {
+            this.nickname = nickname;
+            this.authLevel = AuthLevel.AUTHOR;
+        } else {
+            this.nickname = null;
+            this.authLevel = AuthLevel.NORMAL;
+        }
+    }
 }
