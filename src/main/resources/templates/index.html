@@ -9,6 +9,7 @@
 
     <span sec:authorize="isAnonymous()">로그인을 해주세요~</span>
     <span sec:authorize="isAuthenticated()" th:text="${#authentication.principal.username}"></span>
+    <span sec:authorize="isAuthenticated()" th:text="${#authentication.principal.nickname}"></span>
 
     <form th:action="@{/members/logout}" method="post" sec:authorize="isAuthenticated()">
         <button type="submit">로그아웃</button>
