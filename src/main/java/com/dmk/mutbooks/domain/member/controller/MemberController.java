@@ -1,7 +1,6 @@
 package com.dmk.mutbooks.domain.member.controller;
 
 import com.dmk.mutbooks.domain.member.dto.MemberJoinRequest;
-import com.dmk.mutbooks.domain.member.entity.Member;
 import com.dmk.mutbooks.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,6 +23,11 @@ public class MemberController {
     @PostMapping("/join")
     public String join(MemberJoinRequest request) {
         memberService.join(request);
-        return "redirect:/";
+        return "redirect:/members/login";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "member/login";
     }
 }
