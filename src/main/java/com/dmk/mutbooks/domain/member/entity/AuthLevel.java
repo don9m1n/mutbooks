@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum AuthLevel {
 
-    NORMAL(3), ADMIN(7);
+    NORMAL(3), AUTHOR(5), ADMIN(7);
 
     private final int level;
 }

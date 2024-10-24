@@ -40,4 +40,10 @@ public class Member extends AuditingFields {
                 .authLevel(AuthLevel.NORMAL)
                 .build();
     }
+
+    public void modify(String nickname, String email) {
+        this.nickname = nickname;
+        this.email = email;
+        this.authLevel = nickname.isEmpty() ? AuthLevel.NORMAL : AuthLevel.AUTHOR;
+    }
 }

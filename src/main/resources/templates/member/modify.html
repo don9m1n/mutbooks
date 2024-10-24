@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>내 프로필</h1>
+    <form th:action method="post" th:object="${member}">
+        <div>
+            <label for="username">username</label>
+            <input type="text" id="username" th:field="*{username}" readonly />
+        </div>
+        <div>
+            <label for="email">email</label>
+            <input type="email" id="email" th:field="*{email}" />
+        </div>
+
+        <div>
+            <label for="nickname">nickname</label>
+            <input type="text" id="nickname" th:field="*{nickname}" placeholder="원하는 작가명을 입력해주세요."/>
+        </div>
+
+        <button type="submit">프로필 수정</button>
+    </form>
+</body>
+</html>
